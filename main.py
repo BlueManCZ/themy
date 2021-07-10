@@ -14,15 +14,34 @@ class GUIApp:
         self.builder = Gtk.Builder()
         self.builder.add_from_file(glade_file)
         self.builder.connect_signals(self)
+        self.add_dialog = self.builder.get_object("add_dialog")
 
     def launch(self):
-        window = self.builder.get_object("mainWindow")
+        window = self.builder.get_object("main_window")
         window.show_all()
         Gtk.main()
+
+    # Main window
 
     def on_destroy(self, *args):
         Gtk.main_quit()
         quit()
+
+    def add_application(self, *args):
+        self.add_dialog.show()
+
+    # Add dialog
+
+    def select_application(self, *args):
+        print("Hello")
+
+    def on_add_dialog_destroy(self, *args):
+        print("Heey")
+        self.add_dialog.destroy()
+
+    def on_add_dialog_delete_event(self, *args):
+        self.add_dialog.hide()
+        return True
 
 
 dark = ["atom", "discord", "jetbrains-pycharm", "lmms", "spotify"]
